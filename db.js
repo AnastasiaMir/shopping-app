@@ -40,14 +40,14 @@ const createTable = async () => {
 };
 
 export const addToCart = async (product) => {
-  
+  console.log(product)
     if (!db) throw new Error("Database not initialized");
     try {
-        // await db.execAsync(`Insert into cart (id, image, title, price, quantity) values (${product.id}, '${product.image}', '${product.title}',' ${product.price}', 2);`)
-    await db.execAsync(`INSERT INTO cart (id, image, title, price, quantity) 
-        VALUES (?, ?, ?, ?, ?)
-        ON CONFLICT (id) DO UPDATE SET quantity = quantity + 1;`,
-        [product.id, product.image, product.title, product.price, 1])    
+        await db.execAsync(`Insert into cart (id, image, title, price, quantity) values (${product.id}, '${product.image}', '${product.title}',' ${product.price}', 2);`)
+    // await db.execAsync(`INSERT INTO cart (id, image, title, price, quantity) 
+    //     VALUES (?, ?, ?, ?, ?)
+    //     ON CONFLICT (id) DO UPDATE SET quantity = quantity + 1;`,
+    //     [product.id, product.image, product.title, product.price, 1])    
     } catch (error) {
         console.error("Error in addToCart:", error);
         throw error;
@@ -71,13 +71,4 @@ export const closeDB = async () => {
     if (db) {
         db.close();
     }
-};
-
-export const dropDB = () => {
-    const db = SQLite.openDatabaseSync('cart.db');
-
-    db.execSync('DROP TABLE IF EXISTS cart;');
-    db.closeSync();
-
-    console.log('Таблица cart удалена');
 };
