@@ -39,8 +39,11 @@ export default function IndexScreen() {
   };
 
   useEffect(() => {
+
+    
     const initApp = async () => {
       try {
+        
           const database = await dbModule.initDB();
           setDbInstance(database);
       } catch (error) {
@@ -49,9 +52,6 @@ export default function IndexScreen() {
       }
     };
 
-    
-
-
     initApp();
     fetchProducts();
 
@@ -59,6 +59,7 @@ export default function IndexScreen() {
   }, []);
 
   const addToCart = async (product) => {
+    console.log(product)
     if (!dbInstance) return; 
     try {
       await dbModule.addToCart(product); 

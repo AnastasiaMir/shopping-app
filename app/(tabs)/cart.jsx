@@ -4,7 +4,7 @@ import * as db from '../../db';
 
 const CartItem = ({ item }) => (
   <View style={styles.cartItem}>
-    <Image source={{ uri: product.image }} style={styles.cartImage} />
+    <Image source={{ uri: item.image }} style={styles.cartImage} />
     <View>
       <Text>{item.title}</Text>
       <Text>${item.price.toFixed(2)} x {item.quantity}</Text>
